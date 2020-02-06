@@ -14,7 +14,7 @@ namespace Test.Controllers
 		}
 
 
-		[HttpPost]
+		[HttpGet]
 		public JsonResult GetAnswer(string question)
 		{
 			int index = _rnd.Next(_db.Count);

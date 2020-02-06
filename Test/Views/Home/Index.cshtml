@@ -29,20 +29,20 @@
         <div class="col-md-6 col-md-offset-3">
             <h1>Hello Stranger</h1>
 
-            @using (Html.BeginForm())
+            @*@using (Html.BeginForm())
             {
                 <div class="form-group">
                     @Html.LabelFor(m => m.Question)
                     @Html.TextBoxFor(model => model.Question, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Question)
-                </div>
+                </div>*@
 
                 <button type="button" class="btn btn-success submit">Ask</button>
-            }
+            @*}*@
 
             <br /><br />
             <div class="alert alert-warning fade">
-                <img src="http://entechprod.blob.core.windows.net/dotnetfiddle/morpheus.jpg" style="max-width:100%;" /><br /><br />
+                @*<img src="http://entechprod.blob.core.windows.net/dotnetfiddle/morpheus.jpg" style="max-width:100%;" /><br /><br />*@
                 <strong><span class="alert-content"></span></strong>
             </div>
         </div>
@@ -57,43 +57,43 @@
 
     <script type="text/javascript">
 
-			function openAlert(txt) {
-				$('.alert-content').text(txt);
-				$('.alert').addClass('in');
-			}
+			
 
-			function closeAlert() {
-				$('.alert').removeClass('in');
-			}
+			//function closeAlert() {
+			//	$('.alert').removeClass('in');
+			//}
 
-			$(function(){
+			@*$(function(){
 				var answer = '@Model.Answer';
 
 				if(answer && answer != '')
-					openAlert(answer);
+					openAlert(answer);*@
 
 				$('#Question').change(closeAlert);
 				$('#Question').keyup(closeAlert);
 
 				$('.submit').click(function(){
-					if($('form').valid()) {
+					//if($('form').valid()) {
 
 						$.ajax({
 							url: '@Url.RouteUrl(new{ action="GetAnswer", controller="Home"})',
 							data: {Answer: '', Question: $('#Question').val()},
-								type: 'POST',
+								type: 'GET',
 								dataType: 'json',
 								contentType: "application/json; charset=utf-8",
-								success: function(resp) {
-								openAlert(resp);
-						}});
-					}
-					else {
-						closeAlert();
-					}
+                            success:
+                                function (resp) { openAlert(resp); }
+                        });
+					//}
+					//else {
+						//closeAlert();
+					//}
 				});
-
-			});
+                function openAlert(txt) {
+				    $('.alert-content').text(txt);
+				    $('.alert').addClass('in');
+			    }
+			//});
 
     </script>
 </body>
